@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="nonGmoSegregation" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d1f997c3-2fca-437e-8303-0114ccc54dc1">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BGF Connection"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BluegrassFarms Connection"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
 		<box>
 			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
@@ -23,10 +23,10 @@
 	</style>
 	<subDataset name="nonGMOSeg" uuid="09af17ce-ba98-4020-a6a9-3da1cf5291ec">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BGF Connection"/>
-		<parameter name="id" class="java.lang.Integer"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BluegrassFarms Connection"/>
+		<parameter name="bookingID" class="java.lang.Integer"/>
 		<queryString language="SQL">
-			<![CDATA[select container.number, container.seal, sales_order.weight, booking.number from sales_order inner join booking on sales_order.booking_id=booking.id inner join container on container.id=sales_order.container_id where id=$P{id}]]>
+			<![CDATA[select container.number, container.seal, sales_order.weight, booking.number from sales_order inner join booking on sales_order.booking_id=booking.id inner join container on container.id=sales_order.container_id where booking.id=$P{booking.id}]]>
 		</queryString>
 		<field name="container.number" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="container.number"/>
@@ -38,7 +38,7 @@
 		</field>
 		<field name="sales_order.weight" class="java.math.BigDecimal">
 			<property name="com.jaspersoft.studio.field.label" value="sales_order.weight"/>
-			<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="sales_order "/>
 		</field>
 		<field name="booking.number" class="java.lang.String">
 			<property name="com.jaspersoft.studio.field.label" value="booking.number"/>
@@ -48,34 +48,34 @@
 	<parameter name="booking.id" class="java.lang.Integer"/>
 	<parameter name="bushelSum" class="java.math.BigDecimal"/>
 	<queryString language="SQL">
-		<![CDATA[select product, ip, description, screen_size, number, lot_number, vessel from booking inner join container on container.booking_id=booking.id  where id=$P{booking.id} group by booking.id]]>
+		<![CDATA[select sales_order.product, sales_order.ip, sales_order.description, sales_order.screen_size, booking.number, booking.lot_number, booking.vessel from booking inner join sales_order on sales_order.booking=booking.booking.id inner join container on container.id=sales_order.container_id  where booking.id=$P{booking.id} group by booking.id]]>
 	</queryString>
-	<field name="product" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="product"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.product" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.product"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="select sales_order"/>
 	</field>
-	<field name="ip" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="ip"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.ip" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.ip"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="description" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="description"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="screen_size" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="screen_size"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.screen_size" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.screen_size"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="number" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="number"/>
+	<field name="booking.number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="booking.number"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
 	</field>
-	<field name="lot_number" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="lot_number"/>
+	<field name="booking.lot_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="booking.lot_number"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
 	</field>
-	<field name="vessel" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="vessel"/>
+	<field name="booking.vessel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="booking.vessel"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
 	</field>
 	<background>
@@ -170,7 +170,7 @@ STORAGE, TRANSPORTATION, PROCESSING
 			</staticText>
 			<staticText>
 				<reportElement x="88" y="15" width="310" height="21" uuid="99cc83e8-6c93-42a7-9170-04e292564780"/>
-				<text><![CDATA[ Bluegrass Farms of Ohio, INC., Jeffersonville, OH, 43128]]></text>
+				<text><![CDATA[ Bluegrass farms of Ohio, INC., Jeffersonville, OH, 43128]]></text>
 			</staticText>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement x="88" y="3" width="97" height="14" uuid="b250ee25-9895-4414-96bc-edc557a8e234"/>
@@ -178,15 +178,15 @@ STORAGE, TRANSPORTATION, PROCESSING
 			</textField>
 			<textField>
 				<reportElement x="88" y="29" width="309" height="19" uuid="a79d35fd-db49-48b0-b975-bfadf90a8dba"/>
-				<textFieldExpression><![CDATA[$F{product}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{container.product}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="88" y="58" width="309" height="20" uuid="2caca1db-f15a-427f-a4c4-35aef13b2b8c"/>
-				<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{booking.number}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="88" y="72" width="309" height="20" uuid="5b285fd8-14d8-413d-850a-2cc6f251e9fb"/>
-				<textFieldExpression><![CDATA[$F{vessel}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{booking.vessel}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="20" y="86" width="60" height="18" uuid="ee5e1194-4cf4-4d2d-a91d-034fb9be1644"/>
@@ -201,7 +201,7 @@ STORAGE, TRANSPORTATION, PROCESSING
 			</textField>
 			<textField>
 				<reportElement x="88" y="86" width="309" height="18" uuid="9a0552c5-b0e7-4d26-b865-c104589e7fed"/>
-				<textFieldExpression><![CDATA[$F{lot_number}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{booking.lot_number}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -215,7 +215,7 @@ STORAGE, TRANSPORTATION, PROCESSING
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA["The " + $F{product} + $F{description} + " " + $F{ip} + " were planted, processed, stored, and and transported in accordance with BLUEGRASS FARMS OF OHIO, INC., and the Ohio Seed Improvement Association in conjunction with the Association of Official Seed Certifying Agencies identity preserved programs for Soybeans. The IP Certificates issued by the Ohio Seed Improvement Association are proof the " + $F{product}  + " soyabeans are non-GMO. All we produce, process and sell at BLUEGRASS FARMS OF OHIO, INC., are certified non-GMO."]]></textFieldExpression>
+				<textFieldExpression><![CDATA["The " + $F{sales_order.product} + $F{sales_order.description} + " " + $F{sales_order.ip} + " were planted, processed, stored, and and transported in accordance with BLUEGRASS FARMS OF OHIO, INC., and the Ohio Seed Improvement Association in conjunction with the Association of Official Seed Certifying Agencies identity preserved programs for Soybeans. The IP Certificates issued by the Ohio Seed Improvement Association are proof the " + $F{containerProduct}  + " soyabeans are non-GMO. All we produce, process and sell at BLUEGRASS FARMS OF OHIO, INC., are certified non-GMO."]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
@@ -230,7 +230,7 @@ STORAGE, TRANSPORTATION, PROCESSING
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<datasetRun subDataset="nonGMOSeg" uuid="09b416c5-da86-4c36-bdc9-1d9fe3b14462">
-						<datasetParameter name="id">
+						<datasetParameter name="bookingID">
 							<datasetParameterExpression><![CDATA[$P{booking.id}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
@@ -253,7 +253,7 @@ STORAGE, TRANSPORTATION, PROCESSING
 								<textElement>
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{container.number}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -275,7 +275,7 @@ STORAGE, TRANSPORTATION, PROCESSING
 								<textElement>
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{seal}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{container.seal}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -297,7 +297,7 @@ STORAGE, TRANSPORTATION, PROCESSING
 								<textElement>
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0.00").format($F{weight}.divide(BigDecimal.valueOf(1/0.45359237) , 2, java.math.RoundingMode.HALF_UP))]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0.00").format($F{sales_order.weight}.divide(BigDecimal.valueOf(1/0.45359237) ,0, java.math.RoundingMode.HALF_UP))]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -319,7 +319,7 @@ STORAGE, TRANSPORTATION, PROCESSING
 								<textElement>
 									<font size="9"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{booking.number}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

@@ -1,88 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.14.0.final using JasperReports Library version 6.14.0-2ab0d8625be255bf609c78e1181801213e51db8f  -->
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bol" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c66b49f-6c17-49da-9639-948dec65fef2">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BluegrassFarms Connection"/>
-	<parameter name="containerID" class="java.lang.Integer"/>
-	<parameter name="bookingID" class="java.lang.Integer"/>
-	<parameter name="product" class="java.lang.String"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Bluegrass Adapter"/>
+	<parameter name="container.id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{container.id}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="booking.id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{booking.id}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sales_order.product" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{sales_order.product}]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
-		<![CDATA[select bookingNum, bookingLot, bookingVessel, bookingVesselNum, containerNum, containerSize, containerWeight, containerProduct, containerPackage, containerSeal, containerOrderNumber, containerDescription, containerIP, containerDate, containerScreen, containerRailyard, containerStreet, containerPackageNum, customerName from booking inner join container on container.containerBookingID=booking.bookingID inner join customer on customer.customerID=booking.bookingCustomerID WHERE containerID=$P{containerID}]]>
+		<![CDATA[select container.number, lot_number, vessel, vessel_number, booking.number, container.size, sales_order.weight, sales_order.product, sales_order.package, container.seal, sales_order.number, sales_order.description, sales_order.ip, sales_order.date, sales_order.screen_size, sales_order.railyard, sales_order.street, sales_order.package_number, customer.name from booking inner join container on container.id=sales_order.container_id inner join sales_order on sales_order.booking_id=booking.id inner join customer on customer.id=booking.customer_id WHERE container.id=$P{id}]]>
 	</queryString>
-	<field name="bookingNum" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="bookingNum"/>
+	<field name="booking.number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="booking.number"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
 	</field>
-	<field name="bookingLot" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="bookingLot"/>
+	<field name="booking.lot_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lot_number"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
 	</field>
-	<field name="bookingVessel" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="bookingVessel"/>
+	<field name="booking.vessel" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vessel"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
 	</field>
-	<field name="bookingVesselNum" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="bookingVesselNum"/>
+	<field name="vesse_number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="vessel_number"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="booking"/>
 	</field>
-	<field name="containerNum" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerNum"/>
+	<field name="container.number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="container.number"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
 	</field>
-	<field name="containerSize" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="containerSize"/>
+	<field name="container.size" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="container.size"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
 	</field>
-	<field name="containerWeight" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.label" value="containerWeight"/>
+	<field name="sales_order.weight" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.weight"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
+	</field>
+	<field name="sales_order.product" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.product"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
+	</field>
+	<field name="sales_order.package" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.package"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
+	</field>
+	<field name="container.seal" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="container.seal"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
 	</field>
-	<field name="containerProduct" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerProduct"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.number" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="containerPackage" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerPackage"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.description" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="containerSeal" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerSeal"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.ip" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.ip"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="containerOrderNumber" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerOrderNumber"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="containerDescription" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerDescription"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.screen_size" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.screen_size"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="containerIP" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerIP"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.railyard" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.railyard"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="containerDate" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="containerDate"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.street" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.street"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="containerScreen" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerScreen"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
+	<field name="sales_order.package_number" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="sales_order.package_number"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="sales_order"/>
 	</field>
-	<field name="containerRailyard" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerRailyard"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
-	</field>
-	<field name="containerStreet" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="containerStreet"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
-	</field>
-	<field name="containerPackageNum" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="containerPackageNum"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="container"/>
-	</field>
-	<field name="customerName" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="customerName"/>
+	<field name="customer.name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="customer.name"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="customer"/>
 	</field>
 	<background>
@@ -175,7 +181,7 @@ TEL: (740) 426-6683 -- FAX: (740) 426-6684
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[the property described below, in apparent good order, except as noted (contents and condition of contents of packages unknown),marked, consigned, and destined as shown below, which said company (the word company being understood throughout this contract as meaning any person or corporation in possession of the property under the contract) agrees to carry to its usual place of delivery at said destination, if on its own railroad, water line, highway route or routes, or within the territory of its highway operations.otherwise to deliver to another carrier on the route to said destination. It is mutually agreed, as to each carrier of all or any of said property over all or any portion of said route to destination and as to each party at any time interested in all or any of said property, that every service to be performed hereunder shall be subject to all the terms and conditions of the Uniform Domestic Straight BIll of Lading set forth (&SF) in the Uniform Freight Classification in effect on the date hereof, if this is a rail or rail-water shipment, or(&SO) in the applicable motor carrier classification or tarrif if this is a motor carrier shipment. Shipper hereby certifies that he is familiar with all the terms and conditions of the said bill of lading, including those on the back thereof, set forth in the classification of tarrif hich governs the transportation of this shipment, and the said terms and conditions and hereby agreed to by the shipper and accepted for himself and his assigns]]></text>
+				<text><![CDATA[the property described below, in apparent good order, except as noted (contents and condition of contents of packages unknown),marked, consigned, and destined as shown below, which said company (the word company being understood throughout this contract as meaning any person or corporation in possession of the property under the contract) agrees to carry to its usual place of delivery at said destination, if on its own railroad, water line, highway route or routes, or within the territory of its highway operations.otherwise to deliver to another carrier on the route to said destination. It is mutually agreed, as to each carrier of all or any of said property over all or any portion of said route to destination and as to each party at any time interested in all or any of said property, that every service to be performed hereunder shall be subject to all the terms and conditions of the Uniform Domestic Straight BIll of Lading set forth (&SF) in the Uniform Freight Classification in effect on the date hereof, if this is a rail or rail-water shipment, or(&SO) in the applicable motor carrier classification or tarrif if this is a motor carrier shipment. Shipper hereby certifies that he is familiar with all the terms and conditions of the said bill of lading, including those on the back thereof, set forth in the classification of tarrif which governs the transportation of this shipment, and the said terms and conditions and hereby agreed to by the shipper and accepted for himself and his assigns]]></text>
 			</staticText>
 			<line>
 				<reportElement x="3" y="60" width="100" height="1" uuid="c50f03e6-775f-4c40-a06a-c5c3ae13ff78"/>
@@ -630,7 +636,7 @@ agreed on declared value of the property.
 			</staticText>
 			<textField>
 				<reportElement x="400" y="-1" width="103" height="19" uuid="9f2230cc-4cb1-4a3d-9a7c-5fdda29d932f"/>
-				<textFieldExpression><![CDATA[$F{containerOrderNumber}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{order_number}]]></textFieldExpression>
 			</textField>
 			<textField pattern="MMMMM dd, yyyy">
 				<reportElement x="182" y="50" width="97" height="19" uuid="952e6e4a-32de-491c-b81a-6750df865bde"/>
@@ -638,15 +644,15 @@ agreed on declared value of the property.
 			</textField>
 			<textField>
 				<reportElement x="68" y="415" width="172" height="13" uuid="0c5d0849-c245-468f-983e-f82772af1a4f"/>
-				<textFieldExpression><![CDATA["Container No: " + $F{containerNum}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Container No: " + $F{container.number}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="68" y="434" width="167" height="13" uuid="abcf0e22-4471-46f3-a884-ea0e2c913858"/>
-				<textFieldExpression><![CDATA["Seal No: " + $F{containerSeal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Seal No: " + $F{seal}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="67" y="455" width="193" height="13" uuid="39018d9b-e06a-45a3-86be-cb58cc1801a2"/>
-				<textFieldExpression><![CDATA["Booking No: " + $F{bookingNum}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Booking No: " + $F{booking.number}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="55" y="214" width="217" height="17" uuid="d88d26d3-62ee-4cdb-b540-33be092711c3"/>
@@ -660,28 +666,28 @@ agreed on declared value of the property.
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{containerStreet}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{street}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="120" y="385" width="128" height="16" uuid="b4c4173e-ae6f-4902-b906-aaf277742856"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{containerSize} + " ft container"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{size} + " ft container"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="62" y="478" width="210" height="16" uuid="7a2123e1-df15-4dca-b541-5a9b18416fb6"/>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{containerPackageNum} + "-" + $F{containerPackage} + " of " + $P{product}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{packageNum} + "-" + $F{package} + " of " + $P{product}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="285" y="383" width="70" height="20" uuid="584bb1f5-2385-4358-aa05-b85cc7d6f240"/>
 				<textElement>
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0.00").format($F{containerWeight})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0.00").format($F{weight})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
